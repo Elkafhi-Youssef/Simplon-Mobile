@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simplonline/screens/home_screen.dart';
+import 'package:simplonline/screens/login_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -9,35 +12,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: SimploneApp(),
-    );
-  }
-}
+    
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
 
-class SimploneApp extends StatelessWidget {
-  const SimploneApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.red[100],
-      appBar: AppBar(
-        backgroundColor: Colors.red[600],
-        title: const Text("Simplone", style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
-        actions: [
-          IconButton(icon: const Icon(Icons.person), onPressed: () {}),
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      routes: {
+        '/': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
+        
+      },
     );
   }
 }
