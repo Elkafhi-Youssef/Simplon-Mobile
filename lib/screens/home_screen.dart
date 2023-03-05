@@ -1,10 +1,69 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  _buildBrief(
+    String briefImg,
+    String briefTitle,
+  String briefType) {
+    return Container(
+      width: 160,
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black38, width: 1),
+          borderRadius: BorderRadius.circular(10)),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Image.asset(briefImg,
+            width: 200, height: 200, fit: BoxFit.cover),
+        Container(
+          child:  Text(
+            briefTitle,
+            style: TextStyle(
+              fontFamily: "firstfont",
+              fontSize: 16,
+            ),
+            textAlign: TextAlign.start,
+          ),
+        ),
+        Container(
+          child: Text(briefType),
+          margin: EdgeInsets.fromLTRB(5, 10, 0, 0),
+        )
+      ]),
+    );
+  }
 
+ 
+  var brief = Container(
+    width: 160,
+    padding: const EdgeInsets.all(4),
+    decoration: BoxDecoration(
+        border: Border.all(color: Colors.black38, width: 1),
+        borderRadius: BorderRadius.circular(10)),
+    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Image.asset('assets/img/filerouge.png',
+          width: 200, height: 200, fit: BoxFit.cover),
+      Container(
+        child: const Text(
+          "File rouge",
+          style: TextStyle(
+            fontFamily: "firstfont",
+            fontSize: 16,
+          ),
+          textAlign: TextAlign.start,
+        ),
+      ),
+      Container(
+        child: Text("application web / mobile"),
+        margin: EdgeInsets.fromLTRB(5, 10, 0, 0),
+      )
+    ]),
+  );
   @override
   Widget build(BuildContext context) {
+    Widget brief1 =  _buildBrief('assets/img/filerouge.png', "File rouge", "application web / mobile");
+    Widget brief2 =  _buildBrief('assets/img/filerouge.png', "File rouge", "application web / mobile");
+    Widget brief3 =  _buildBrief('assets/img/mypet.png', "My Pets", "application web / mobile");
+    Widget brief4 =  _buildBrief('assets/img/angular.png', "Angular", "application web / mobile");
     return Scaffold(
       appBar: AppBar(
         title: const Text("Simplone", style: TextStyle(color: Colors.white)),
@@ -76,8 +135,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 width: double.infinity,
-                child: Column(
-                  children: [
+                child: Column(children: [
                   const Text(
                     "Lsit of briefs",
                     style: TextStyle(
@@ -90,124 +148,14 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Container(
                     child: Wrap(
-                      runSpacing: 8.0,
+                      runSpacing: 10.0,
+                      alignment: WrapAlignment.center,
+                      spacing: 10,
                       children: [
-                        Container(
-                          width: 160,
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black38, width: 1),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                          
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                            Image.asset('assets/img/filerouge.png',
-                                width: 200, height: 200, fit: BoxFit.cover),
-                            Container(
-                              child: const Text(
-                                "File rouge",
-                                style: TextStyle(
-                                  fontFamily: "firstfont",
-                                  fontSize: 16,
-                                ),
-                                textAlign: TextAlign.start,
-                              ),
-                            )
-                            ,
-                            Container(child: Text("application web / mobile"),
-                            margin: EdgeInsets.fromLTRB(5, 10,0 , 0),)
-                          ]),
-                        ),
-                        SizedBox(width: 10,),
-                        Container(
-                          width: 160,  
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black38, width: 1),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                          
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                            Image.asset('assets/img/filerouge.png',
-                                width: 200, height: 200, fit: BoxFit.cover),
-                            Container(
-                              child: const Text(
-                                "File rouge",
-                                style: TextStyle(
-                                  fontFamily: "firstfont",
-                                  fontSize: 16,
-                                ),
-                                textAlign: TextAlign.start,
-                              ),
-                            )
-                            ,
-                            Container(child: Text("application web / mobile"),
-                            margin: EdgeInsets.fromLTRB(5, 10,0 , 0),)
-                          ]),
-                        ),
-                        Container(
-                          width: 160,  
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black38, width: 1),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                          
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                            Image.asset('assets/img/mypet.png',
-                                width: 200, height: 200, fit: BoxFit.cover),
-                            Container(
-                              child: const Text(
-                                "My Pets",
-                                style: TextStyle(
-                                  fontFamily: "firstfont",
-                                  fontSize: 16,
-                                ),
-                                textAlign: TextAlign.start,
-                              ),
-                            )
-                            ,
-                            Container(child: Text("application web / mobile"),
-                            margin: EdgeInsets.fromLTRB(5, 10,0 , 0),)
-                          ]),
-                        ),
-                        Container(
-                          width: 160,  
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black38, width: 1),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                          
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: Image.asset('assets/img/angular.png',
-                                  width: 200, height: 200, fit: BoxFit.cover, ),
-                            ),
-                            Container(
-                              child: const Text(
-                                "Angular",
-                                style: TextStyle(
-                                  fontFamily: "firstfont",
-                                  fontSize: 16,
-                                ),
-                                textAlign: TextAlign.start,
-                              ),
-                            )
-                            ,
-                            Container(child: Text("application web / mobile"),
-                            margin: EdgeInsets.fromLTRB(5, 10,0 , 0),)
-                          ]),
-                        ),
+                        brief1,
+                        brief2,
+                        brief4,
+                        brief3,
                       ],
                     ),
                   )
