@@ -1,10 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  _buildBrief(
-    String briefImg,
-    String briefTitle,
-  String briefType) {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  getUser() {
+    var user = FirebaseAuth.instance.currentUser;
+    print(user?.email);
+  }
+
+  initalMessage() async {
+    getUser();
+    super.initState();
+  }
+
+  _buildBrief(String briefImg, String briefTitle, String briefType) {
     return Container(
       width: 160,
       padding: const EdgeInsets.all(4),
@@ -12,10 +25,9 @@ class HomeScreen extends StatelessWidget {
           border: Border.all(color: Colors.black38, width: 1),
           borderRadius: BorderRadius.circular(10)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Image.asset(briefImg,
-            width: 200, height: 200, fit: BoxFit.cover),
+        Image.asset(briefImg, width: 200, height: 200, fit: BoxFit.cover),
         Container(
-          child:  Text(
+          child: Text(
             briefTitle,
             style: TextStyle(
               fontFamily: "firstfont",
@@ -32,7 +44,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
- 
   var brief = Container(
     width: 160,
     padding: const EdgeInsets.all(4),
@@ -58,12 +69,17 @@ class HomeScreen extends StatelessWidget {
       )
     ]),
   );
+
   @override
   Widget build(BuildContext context) {
-    Widget brief1 =  _buildBrief('assets/img/filerouge.png', "File rouge", "application web / mobile");
-    Widget brief2 =  _buildBrief('assets/img/filerouge.png', "File rouge", "application web / mobile");
-    Widget brief3 =  _buildBrief('assets/img/mypet.png', "My Pets", "application web / mobile");
-    Widget brief4 =  _buildBrief('assets/img/angular.png', "Angular", "application web / mobile");
+    Widget brief1 = _buildBrief(
+        'assets/img/filerouge.png', "File rouge", "application web / mobile");
+    Widget brief2 = _buildBrief(
+        'assets/img/filerouge.png', "File rouge", "application web / mobile");
+    Widget brief3 = _buildBrief(
+        'assets/img/mypet.png', "My Pets", "application web / mobile");
+    Widget brief4 = _buildBrief(
+        'assets/img/angular.png', "Angular", "application web / mobile");
     return Scaffold(
       appBar: AppBar(
         title: const Text("Simplone", style: TextStyle(color: Colors.white)),
@@ -74,10 +90,12 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(icon: const Icon(Icons.message), onPressed: () {}),
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
+IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushReplacementNamed("login");
+              }),
         ],
       ),
       body: SingleChildScrollView(
@@ -86,49 +104,47 @@ class HomeScreen extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                child: Expanded(
-                  child: Row(children: [
-                    Container(
-                      child: Image.asset('assets/img/imgpromo.webp',
-                          width: 200, height: 200, fit: BoxFit.cover),
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all(8),
-                              child: const Text("Brendan Eich",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: "firstfont",
-                                      fontWeight: FontWeight.w500)),
-                            ),
-                            Container(
-                              margin: EdgeInsets.all(8),
-                              child: const Text("19 apprenants",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: "firstfont",
-                                      fontWeight: FontWeight.w500)),
-                            ),
-                            Container(
-                              margin: EdgeInsets.all(8),
-                              child: const Text(
-                                "2022/2023",
+                child: Row(children: [
+                  Container(
+                    child: Image.asset('assets/img/imgpromo.webp',
+                        width: 200, height: 200, fit: BoxFit.cover),
+                  ),
+                  Expanded(
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(8),
+                            child: const Text("Brendan Eich",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontFamily: "firstfont",
-                                    fontWeight: FontWeight.w500),
-                              ),
+                                    fontWeight: FontWeight.w500)),
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(8),
+                            child: const Text("19 apprenants",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: "firstfont",
+                                    fontWeight: FontWeight.w500)),
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(8),
+                            child: const Text(
+                              "2022/2023",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: "firstfont",
+                                  fontWeight: FontWeight.w500),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    )
-                  ]),
-                ),
+                    ),
+                  )
+                ]),
               ),
               const SizedBox(
                 height: 20,

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "780452082964",
+    "project_id": "simplonline-sajo",
+    "storage_bucket": "simplonline-sajo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780452082964:android:7b6046e7228b04fed17e01",
+        "android_client_info": {
+          "package_name": "com.example.simplonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780452082964-tthoqmkdou8mbnbfga46199h8ikocot7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYJFSkinRI7m0c2RNzHKNPK6K4PrSUYeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780452082964-tthoqmkdou8mbnbfga46199h8ikocot7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,58 +1,64 @@
-import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class Registre extends StatefulWidget {
+  const Registre({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<Registre> createState() => _RegistreState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
- var mypassword, myemail;
-  GlobalKey<FormState> _formstate = new GlobalKey<FormState>();
-  signIn() async {
+class _RegistreState extends State<Registre> {
+  var myusername, mypassword, myemail;
+  // GlobalKey<FormState> formstate = new GlobalKey<FormState>();
+  GlobalKey<FormState> _formstate = GlobalKey<FormState>();
+  signUp() async {
     var formdata = _formstate.currentState;
     if (_formstate.currentState != null &&
         _formstate.currentState!.validate()) {
       formdata?.save();
+
       try {
         // showLoading(context);
         UserCredential userCredential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: myemail, password: mypassword);
+            .createUserWithEmailAndPassword(
+                email: myemail, password: mypassword);
         return userCredential;
       } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
+        if (e.code == 'weak-password') {
+          AwesomeDialog(
+              context: context,
+              title: "Error",
+              body: Text("Password is to weak"))
+            ..show();
+        } else if (e.code == 'email-already-in-use') {
           // Navigator.of(context).pop();
           AwesomeDialog(
               context: context,
               title: "Error",
-              body: Text("No user found for that email"))
-            ..show();
-        } else if (e.code == 'wrong-password') {
-          Navigator.of(context).pop();
-          AwesomeDialog(
-              context: context,
-              title: "Error",
-              body: Text("Wrong password provided for that user"))
+              body: Text("The account already exists for that email"))
             ..show();
         }
+      } catch (e) {
+        print(e);
       }
-    } else {
-      print("Not Vaild");
-    }
+    } else {}
   }
-
 
   @override
   Widget build(BuildContext context) {
-
-     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      body: ListView(
         children: [
-          Center(child: Image.asset("assets/img/83168-login-success.gif",width: 300,height: 300)),
+          SizedBox(height: 100),
+          Center(
+              child: Image.asset(
+            "assets/img/83168-login-success.gif",
+            width: 200,
+            height: 200,
+          )),
           Container(
             padding: EdgeInsets.all(20),
             child: Form(
@@ -61,17 +67,37 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     TextFormField(
                       onSaved: (val) {
+                        myusername = val;
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person),
+                          hintText: "username",
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(width: 1))),
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
+                      onSaved: (val) {
                         myemail = val;
                       },
                       // validator: (val) {
                       //   if (val.length > 100) {
                       //     return "Email can't to be larger than 100 letter";
                       //   }
+                      //   if (val.length < 2) {
+                      //     return "Email can't to be less than 2 letter";
+                      //   }
                       //   return null;
                       // },
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person),
-                          hintText: "Email",
+                          hintText: "email",
                           border: OutlineInputBorder(
                               borderSide: BorderSide(width: 1))),
                     ),
@@ -100,11 +126,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         margin: EdgeInsets.all(10),
                         child: Row(
                           children: [
-                            Text("if you havan't accout "),
+                            Text("if you have Account "),
                             InkWell(
                               onTap: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed("signup");
+                                Navigator.of(context).pushNamed("login");
                               },
                               child: Text(
                                 "Click Here",
@@ -115,26 +140,31 @@ class _LoginScreenState extends State<LoginScreen> {
                         )),
                     Container(
                         child: ElevatedButton(
-                      
                       onPressed: () async {
-                        var user = await signIn();
-                        if (user != null) {
+                        UserCredential response = await signUp();
+                        print("===================");
+                        if (response != null) {
+                          print("registere done now navigate to homw");
+                          // await FirebaseFirestore.instance
+                          //     .collection("users")
+                          //     .add({"username": myusername, "email": myemail});
                           Navigator.of(context)
                               .pushReplacementNamed("homepage");
-                        }
+                        } else {
+                          print("Sign Up Faild");
+                        }  
+                        print("===================");
                       },
                       child: Text(
-                        "Sign in",
-                        style: Theme.of(context).textTheme.bodySmall,
+                        "Sign Up",
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                    ),),
-                    
+                    ))
                   ],
                 )),
           )
         ],
       ),
     );
-    
-  }  
+  }
 }
