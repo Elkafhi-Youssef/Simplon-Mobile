@@ -13,7 +13,9 @@ class briefDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(data['briefName']), // accessing the 'briefName' property
+          backgroundColor: Colors.deepOrangeAccent,
+          title: Text(data['briefName']),
+          centerTitle: true, // accessing the 'briefName' property
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -22,8 +24,8 @@ class briefDetails extends StatelessWidget {
               Container(
                 color: Colors.white,
                 width: double.infinity,
-                child: const Text(
-                  'CVThèque',
+                child:  Text(
+                  data['briefName'],
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -40,8 +42,8 @@ class briefDetails extends StatelessWidget {
                         // width: 100,
                         // height: 100,
                         margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(4),
-                        color: Colors.amber,
+                        padding: const EdgeInsets.all(8),
+                        color: Colors.deepOrangeAccent,
                         child: const Text(
                           'Java',
                           style: TextStyle(fontSize: 15),
@@ -51,8 +53,8 @@ class briefDetails extends StatelessWidget {
                         // width: 100,
                         // height: 100,
                         margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(4),
-                        color: Colors.amber,
+                        padding: const EdgeInsets.all(8),
+                        color: Colors.deepOrangeAccent,
                         child: const Text(
                           'MySQL',
                           style: TextStyle(fontSize: 15),
@@ -62,8 +64,8 @@ class briefDetails extends StatelessWidget {
                         // width: 100,
                         // height: 100,
                         margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(4),
-                        color: Colors.amber,
+                        padding: const EdgeInsets.all(8),
+                        color: Colors.deepOrangeAccent,
                         child: const Text(
                           'Git',
                           style: TextStyle(fontSize: 15),
@@ -73,8 +75,8 @@ class briefDetails extends StatelessWidget {
                         // width: 100,
                         // height: 100,
                         margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(4),
-                        color: Colors.amber,
+                        padding: const EdgeInsets.all(8),
+                        color: Colors.deepOrangeAccent,
                         child: const Text(
                           'UML',
                           style: TextStyle(fontSize: 15),
@@ -83,39 +85,14 @@ class briefDetails extends StatelessWidget {
                     ],
                   )),
 
+             
               Container(
                 color: Colors.white,
                 width: double.infinity,
                 margin: const EdgeInsets.all(10),
                 padding: const EdgeInsets.all(6),
                 child: Column(
-                  children: const [
-                    Text(
-                      'Contexte du projet  :',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'passage et la recherche des CVs entre les apprenants, CME et les responsables. passage et la recherche des CVs entre les apprenants, CME et les responsables.passage et la recherche des CVs entre les apprenants, CME et les responsables.',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 14,
-                        // fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                color: Colors.white,
-                width: double.infinity,
-                margin: const EdgeInsets.all(10),
-                padding: const EdgeInsets.all(6),
-                child: Column(
-                  children: const [
+                  children:  [
                     Text(
                       'Modalités pédagogiques  :',
                       textAlign: TextAlign.left,
@@ -124,8 +101,7 @@ class briefDetails extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      'Travail en binôme - Deadline 22/\12/\2022',
+                    Text( data['endDate'].toString()+"-"+data['group'].toString(),
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 14,
@@ -167,9 +143,9 @@ class briefDetails extends StatelessWidget {
                 margin: const EdgeInsets.all(10),
                 padding: const EdgeInsets.all(6),
                 child: Column(
-                  children: const [
+                  children:  [
                     Text(
-                      'Modalités d\'évaluation  :',
+                      'Application Type :',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 20,
@@ -177,7 +153,7 @@ class briefDetails extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Code exécutable avec explication de la solution',
+                      data['type'].toString(),
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 14,

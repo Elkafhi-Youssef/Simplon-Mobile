@@ -43,7 +43,7 @@ class _BriefsListState extends State<BriefsList> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-       appBar: AppBar(
+       appBar: AppBar(backgroundColor: Colors.deepOrangeAccent,
         title: const Text("Briefs", style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
@@ -94,9 +94,9 @@ class _BriefsListState extends State<BriefsList> {
                                 color: Colors.white,
                                 width: double.infinity,
                                 padding: const EdgeInsets.all(15),
-                                child: Column(children: const [
+                                child: Column(children:  [
                                   Text(
-                                  'CVThèque',
+                                  briefs[i]['briefName'],
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 24,
@@ -104,8 +104,8 @@ class _BriefsListState extends State<BriefsList> {
                                   ),
                                 ),
                                 // ignore: unnecessary_const
-                                const Text(
-                                  'brief mini description',
+                                 Text(
+                                  briefs[i]['type'].toString(),
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontSize: 14,

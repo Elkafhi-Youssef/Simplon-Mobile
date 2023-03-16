@@ -109,6 +109,7 @@ backgroundColor: Colors.deepOrangeAccent,
           
           child: 
               Container(
+                margin: EdgeInsets.fromLTRB(10, 50, 10, 0),
                 width: double.infinity,
                 child: Column(children: [
                   Container(
